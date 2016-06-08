@@ -8,7 +8,8 @@ public class CorporateSongJob implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 //		Song song = new Song();
 //		song.playMp3File("E:\\Music\\Maksim - The Piano Player (2003)\\Maksim Mrvica - Croatian Rhapsody.mp3");
-		System.out.println("Corporate Song Play");
+		Song song = new Song();
+		song.playMp3File(DefaultValue.corporateSongDir);
 	}
 
 }

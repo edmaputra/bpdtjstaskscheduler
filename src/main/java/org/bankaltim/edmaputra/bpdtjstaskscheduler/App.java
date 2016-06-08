@@ -11,9 +11,12 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 public class App implements Runnable {
 	
 	private MainFrame form;
+//	private Song song;
 
     public App() {
         form = new MainFrame();
+//    	song = new Song();
+//    	song.playMp3File(DefaultValue.corporateSongDir);
     }
 
     public void start() {

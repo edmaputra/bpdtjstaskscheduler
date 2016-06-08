@@ -1,10 +1,12 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
+import java.io.File;
+
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
 
-public class Song {
+public class Song {	
 
 	public void playMp3File(String path) {
 		SoundJLayer soundToPlay = new SoundJLayer(path);
@@ -24,7 +26,9 @@ class SoundJLayer extends PlaybackListener implements Runnable {
 
 	public void play() {
 		try {
-			String urlAsString = "file:///" + new java.io.File(".").getCanonicalPath() + "/" + this.filePath;
+			String urlAsString = "file:///" + new File(filePath).getCanonicalPath();
+			
+//			System.out.println()
 
 			this.player = new AdvancedPlayer(new java.net.URL(urlAsString).openStream(),
 					javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice());
