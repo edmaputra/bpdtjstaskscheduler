@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = -5461558103154462195L;
+	
+	SimpleTriggerExample triggerDoaPagi;
 
 	public MainFrame() {
 		initComponents();
@@ -51,8 +53,8 @@ public class MainFrame extends JFrame {
 
 	private void startDoaPagiScheduler() {
 		startButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
-		SimpleTriggerExample trigger = new SimpleTriggerExample();
-		trigger.triggerDoaPagi(txtJamDoaPagi.getText(), txtMenitDoaPagi.getText());
+		triggerDoaPagi = new SimpleTriggerExample();
+		triggerDoaPagi.triggerDoaPagi(txtJamDoaPagi.getText(), txtMenitDoaPagi.getText());
 	}
 
 	private void startCorporateSongScheduler() {
@@ -87,7 +89,11 @@ public class MainFrame extends JFrame {
 	}
 
 	private void stopDoaPagiScheduler() {
+		System.out.println("A1");
 		stopButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
+		System.out.println("B1");
+		triggerDoaPagi.stopDoaPagi();
+		System.out.println("C1");
 	}
 
 	private void stopCorporateSongScheduler() {
