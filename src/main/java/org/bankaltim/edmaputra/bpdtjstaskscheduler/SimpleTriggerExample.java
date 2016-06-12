@@ -62,7 +62,8 @@ public class SimpleTriggerExample {
 		}
 	}
 
-	public void triggerDoaPagi(String hour, String minute) {		
+	public void triggerDoaPagi(String hour, String minute) {
+		System.out.println(DefaultValue.doaPagiDir);
 		jobDoaPagi = newJob(DoaJob.class).withIdentity(JOB_NAME_DOA_PAGI, "group1").build();
 		startScheduler(jobDoaPagi, hour, minute, "doaPagiTrigger", "group1");
 	}
@@ -112,7 +113,7 @@ public class SimpleTriggerExample {
 
 	public void stopScheduler(Scheduler scheduler, JobDetail job) throws SchedulerException {
 //		scheduler.interrupt(JobKey.jobKey(JOB_NAME_DOA_PAGI, "group1"));
-		scheduler.deleteJob(job.getKey());
+		scheduler.shutdown(true);
 	}
 
 	private void startCobaScheduler(JobDetail jobDetail, String hour, String minute, String triggerName, String group) {

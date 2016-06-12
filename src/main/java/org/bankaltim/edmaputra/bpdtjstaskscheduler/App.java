@@ -1,5 +1,6 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,15 +9,18 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
+import org.quartz.SchedulerException;
+
 public class App implements Runnable {
 	
 	private MainFrame form;
-//	private Song song;
+//	private CobaScheduler coba;
+//	private CobaFrame cobaFrame;
 
     public App() {
         form = new MainFrame();
-//    	song = new Song();
-//    	song.playMp3File(DefaultValue.corporateSongDir);
+//    	coba = new CobaScheduler();
+//    	cobaFrame = new CobaFrame();
     }
 
     public void start() {
@@ -26,8 +30,9 @@ public class App implements Runnable {
 //    @Override
     public void run() {
         form.setVisible(true);
-//        LoginView view = new LoginView(form);
-//        view.display(form, null);
+//    	cobaFrame.setSize(new Dimension(500,300));
+//    	cobaFrame.setVisible(true);
+    	
     }
 
     /**

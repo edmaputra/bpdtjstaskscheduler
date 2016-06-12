@@ -450,6 +450,81 @@ public class MainFrame extends JFrame {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
 		mainPanel.add(panelCustom, gridBagConstraints);
+		
+//		panelZuhur.setBorder(javax.swing.BorderFactory.createTitledBorder(
+//				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Custom",
+//				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+//				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+//		panelZuhur.setLayout(new java.awt.GridBagLayout());
+//
+//		btnStartCustom.setText("Start");
+//		btnStartCustom.setPreferredSize(new java.awt.Dimension(57, 35));
+//		btnStartCustom.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				startCustomScheduler();
+//			}
+//		});
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 4;
+//		gridBagConstraints.gridy = 2;
+//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+//		panelZuhur.add(btnStartCustom, gridBagConstraints);
+//
+//		btnStopCustom.setText("Stop");
+//		btnStopCustom.setEnabled(false);
+//		btnStopCustom.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				stopCustomScheduler();
+//			}
+//		});
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 4;
+//		gridBagConstraints.gridy = 3;
+//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+//		panelZuhur.add(btnStopCustom, gridBagConstraints);
+//
+//		jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+//		jLabel9.setText(":");
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 2;
+//		gridBagConstraints.gridy = 2;
+//		gridBagConstraints.gridheight = 2;
+//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+//		panelZuhur.add(jLabel9, gridBagConstraints);
+//
+//		txtJamCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+//		txtJamCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+//		txtJamCustom.setPreferredSize(new java.awt.Dimension(50, 45));
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 1;
+//		gridBagConstraints.gridy = 2;
+//		gridBagConstraints.gridheight = 2;
+//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+//		panelZuhur.add(txtJamCustom, gridBagConstraints);
+//
+//		txtMenitCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+//		txtMenitCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+//		txtMenitCustom.setPreferredSize(new java.awt.Dimension(50, 45));
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 3;
+//		gridBagConstraints.gridy = 2;
+//		gridBagConstraints.gridheight = 2;
+//		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+//		panelZuhur.add(txtMenitCustom, gridBagConstraints);
+//
+//		jLabel13.setText("Jam :");
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 0;
+//		gridBagConstraints.gridy = 2;
+//		panelZuhur.add(jLabel13, gridBagConstraints);
+//
+//		gridBagConstraints = new java.awt.GridBagConstraints();
+//		gridBagConstraints.gridx = 0;
+//		gridBagConstraints.gridy = 2;
+//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+//		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+//		mainPanel.add(panelZuhur, gridBagConstraints);
 
 		getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -485,6 +560,8 @@ public class MainFrame extends JFrame {
 	private javax.swing.JPanel mainPanel;
 	private javax.swing.JPanel panelCorporateSong;
 	private javax.swing.JPanel panelCustom;
+	private javax.swing.JPanel panelZuhur;
+	private javax.swing.JPanel panelAsar;
 	private javax.swing.JPanel panelDoaPagi;
 	private javax.swing.JPanel panelMars;
 	private javax.swing.JPanel titlePanel;
