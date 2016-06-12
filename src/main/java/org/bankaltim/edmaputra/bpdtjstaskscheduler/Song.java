@@ -8,9 +8,18 @@ import javazoom.jl.player.advanced.PlaybackListener;
 
 public class Song {	
 
+	SoundJLayer soundToPlay;
+	
+	public Song(){
+	}
+	
 	public void playMp3File(String path) {
-		SoundJLayer soundToPlay = new SoundJLayer(path);
+		soundToPlay = new SoundJLayer(path);
 		soundToPlay.play();
+	}
+	
+	public void stopPlayBack(){
+//		soundToPlay.playbackFinished(new PlaybackEvent(null, null, null));
 	}
 
 }
@@ -52,7 +61,7 @@ class SoundJLayer extends PlaybackListener implements Runnable {
 
 	public void playbackFinished(PlaybackEvent playbackEvent)
     {
-        System.out.println("playbackEnded");
+        System.out.println("playbackEnded");        
     }
 
 	// Runnable members

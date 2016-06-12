@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
 		if (validateWaktu(txtJamCustom, txtMenitCustom)) {
 			startButtonClicked(txtJamCustom, txtMenitCustom, btnStartCustom, btnStopCustom);
 			SimpleTriggerExample trigger = new SimpleTriggerExample();
-			trigger.triggerCobaCustom(txtJamCustom.getText(), txtMenitCustom.getText());
+//			trigger.triggerCobaCustom(txtJamCustom.getText(), txtMenitCustom.getText());
 		} else {
 			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
 		}
@@ -89,11 +89,8 @@ public class MainFrame extends JFrame {
 	}
 
 	private void stopDoaPagiScheduler() {
-		System.out.println("A1");
 		stopButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
-		System.out.println("B1");
 		triggerDoaPagi.stopDoaPagi();
-		System.out.println("C1");
 	}
 
 	private void stopCorporateSongScheduler() {
