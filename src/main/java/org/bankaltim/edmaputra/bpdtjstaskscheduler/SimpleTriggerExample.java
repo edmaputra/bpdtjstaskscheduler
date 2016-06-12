@@ -40,6 +40,13 @@ public class SimpleTriggerExample {
 	private Scheduler schedulerCustom;
 
 	public SimpleTriggerExample() {
+		
+		try {
+			schedulerDoaPagi = new StdSchedulerFactory().getScheduler();
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void triggerDoaPagiInterruptable(){
@@ -63,13 +70,14 @@ public class SimpleTriggerExample {
 	}
 
 	public void triggerDoaPagi(String hour, String minute) {
-		System.out.println(DefaultValue.doaPagiDir);
 		jobDoaPagi = newJob(DoaJob.class).withIdentity(JOB_NAME_DOA_PAGI, "group1").build();
-		startScheduler(jobDoaPagi, hour, minute, "doaPagiTrigger", "group1");
+		Trigger trigger = setTrigger(jobDoaPagi, hour, minute, "doaPagiTrigger", "group1");
+		startEachScheduler(jobDoaPagi, trigger);
 	}
 
 	public void triggerCorporateSong(String hour, String minute) {
 		jobCorporateSong = newJob(CorporateSongJob.class).withIdentity(JOB_NAME_CORPORATE_SONG, "group1").build();
+		
 		startScheduler(jobCorporateSong, hour, minute, "corporateSongTrigger", "group1");
 	}
 
@@ -110,6 +118,16 @@ public class SimpleTriggerExample {
 			e.printStackTrace();
 		}
 	}
+	
+	private void startEachScheduler(JobDetail job, Trigger trigger){
+		try {			
+			setSchedulerEach(schedulerDoaPagi, job, trigger);
+			System.out.println("Start Scheduler Doa Pagi");
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void stopScheduler(Scheduler scheduler, JobDetail job) throws SchedulerException {
 //		scheduler.interrupt(JobKey.jobKey(JOB_NAME_DOA_PAGI, "group1"));
@@ -138,11 +156,10 @@ public class SimpleTriggerExample {
 		// scheduler.in
 	}
 
-	private void setSchedulerEach(Scheduler scheduler, JobDetail jobDetail, Trigger trigger) throws SchedulerException {
-		scheduler = new StdSchedulerFactory().getScheduler();
-		scheduler.start();
+	private void setSchedulerEach(Scheduler scheduler, JobDetail jobDetail, Trigger trigger) throws SchedulerException {		
 		scheduler.scheduleJob(jobDetail, trigger);
-		// scheduler.in
+		scheduler.start();
+		System.out.println("scheduler start");
 	}
 
 	private String setCronExpression(String hour, String minute) {

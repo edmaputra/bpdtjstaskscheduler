@@ -1,6 +1,5 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,8 +7,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-
-import org.quartz.SchedulerException;
 
 public class App implements Runnable {
 	
