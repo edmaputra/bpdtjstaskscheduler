@@ -84,7 +84,7 @@ public class SimpleTriggerExample {
 		jobCustom = newJob(CustomJob.class).withIdentity(JOB_NAME_CUSTOM, "group1").build();
 		Trigger trigger = setTrigger(jobCustom, hour, minute, TRIGGER_NAME_CUSTOM, "group1");
 		startEachScheduler(schedulerCustom, jobCustom, trigger);
-	}	
+	}
 
 	public void stopDoaPagi() {
 		try {

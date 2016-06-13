@@ -95,11 +95,11 @@ public class MainFrame extends JFrame {
 	private Boolean validateWaktu(JTextField jam, JTextField menit) {
 		Boolean validated = true;
 		if (jam.getText().trim().isEmpty()) {
-			validated = false;
+			jam.setText("00");
 		}
 
 		if (menit.getText().trim().isEmpty()) {
-			validated = false;
+			menit.setText("00");
 		}
 
 		Integer jamInt = Integer.parseInt(jam.getText());
