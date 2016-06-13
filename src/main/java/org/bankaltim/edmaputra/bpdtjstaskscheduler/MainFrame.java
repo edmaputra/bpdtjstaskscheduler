@@ -1,91 +1,137 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
+import java.text.NumberFormat;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.NumberFormatter;
 
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = -5461558103154462195L;
-	
+
 	SimpleTriggerExample triggerDoaPagi;
+	SimpleTriggerExample triggerCorporateSong;
+	SimpleTriggerExample triggerMarsBankaltim;
+	SimpleTriggerExample triggerDzuhur;
+	SimpleTriggerExample triggerAsar;
+	SimpleTriggerExample triggerCustom;
 
 	public MainFrame() {
 		initComponents();
 	}
 
-//	private void browseDoaPagi() {
-//		browseButtonSetter(txtFileDoaPagi);
-//	}
-//
-//	private void browseCorporateSong() {
-//		browseButtonSetter(txtFileCorporateSong);
-//	}
-//
-//	private void browseMarsBankaltim() {
-//		browseButtonSetter(txtFileMarsBankaltim);
-//	}
-//
-//	private void browseCustom() {
-//		browseButtonSetter(txtFileCustom);
-//	}
-//
-//	private void browseButtonSetter(JTextField jTextField) {
-//		JFileChooser chooser = new JFileChooser();
-//		chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-//		int result = chooser.showOpenDialog(this);
-//		if (result == JFileChooser.APPROVE_OPTION) {
-//			File f = chooser.getSelectedFile();
-//			jTextField.setText(f.getAbsolutePath());
-//		}
-//	}
+	// private void browseDoaPagi() {
+	// browseButtonSetter(txtFileDoaPagi);
+	// }
+	//
+	// private void browseCorporateSong() {
+	// browseButtonSetter(txtFileCorporateSong);
+	// }
+	//
+	// private void browseMarsBankaltim() {
+	// browseButtonSetter(txtFileMarsBankaltim);
+	// }
+	//
+	// private void browseCustom() {
+	// browseButtonSetter(txtFileCustom);
+	// }
+	//
+	// private void browseButtonSetter(JTextField jTextField) {
+	// JFileChooser chooser = new JFileChooser();
+	// chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+	// int result = chooser.showOpenDialog(this);
+	// if (result == JFileChooser.APPROVE_OPTION) {
+	// File f = chooser.getSelectedFile();
+	// jTextField.setText(f.getAbsolutePath());
+	// }
+	// }
 
 	private void startCustomScheduler() {
 		if (validateWaktu(txtJamCustom, txtMenitCustom)) {
 			startButtonClicked(txtJamCustom, txtMenitCustom, btnStartCustom, btnStopCustom);
 			SimpleTriggerExample trigger = new SimpleTriggerExample();
-//			trigger.triggerCobaCustom(txtJamCustom.getText(), txtMenitCustom.getText());
+			// trigger.triggerCobaCustom(txtJamCustom.getText(),
+			// txtMenitCustom.getText());
 		} else {
 			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
 		}
 	}
 
 	private void startDoaPagiScheduler() {
-		startButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
-		triggerDoaPagi = new SimpleTriggerExample();
-		triggerDoaPagi.triggerDoaPagi(txtJamDoaPagi.getText(), txtMenitDoaPagi.getText());
+		if (validateWaktu(txtJamDoaPagi, txtMenitDoaPagi)) {
+			startButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
+			triggerDoaPagi = new SimpleTriggerExample();
+			triggerDoaPagi.triggerDoaPagi(txtJamDoaPagi.getText(), txtMenitDoaPagi.getText());
+		} else {
+			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
+		}
 	}
 
 	private void startCorporateSongScheduler() {
-		// if (validateWaktu(txtJamCustom, txtMenitCustom)){
-		startButtonClicked(txtJamCorporateSong, txtMenitCorporateSong, btnStartCorporateSong, btnStopCorporateSong);
-		SimpleTriggerExample trigger = new SimpleTriggerExample();
-		trigger.triggerCorporateSong(txtJamCorporateSong.getText(), txtMenitCorporateSong.getText());
-		// } else {
-		// JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
-		// }
+		if (validateWaktu(txtJamCorporateSong, txtMenitCorporateSong)) {
+			startButtonClicked(txtJamCorporateSong, txtMenitCorporateSong, btnStartCorporateSong, btnStopCorporateSong);
+			SimpleTriggerExample trigger = new SimpleTriggerExample();
+			trigger.triggerCorporateSong(txtJamCorporateSong.getText(), txtMenitCorporateSong.getText());
+		} else {
+			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
+		}
 
 	}
 
 	private void startMarsBankaltimScheduler() {
-		startButtonClicked(txtJamMarsBankaltim, txtMenitMarsBankaltim, btnStartMarsBankaltim, btnStopMarsBankaltim);
-		SimpleTriggerExample trigger = new SimpleTriggerExample();
-		trigger.triggerMarsBankaltim(txtJamMarsBankaltim.getText(), txtMenitMarsBankaltim.getText());
+		if (validateWaktu(txtJamMarsBankaltim, txtMenitMarsBankaltim)) {
+			startButtonClicked(txtJamMarsBankaltim, txtMenitMarsBankaltim, btnStartMarsBankaltim, btnStopMarsBankaltim);
+			SimpleTriggerExample trigger = new SimpleTriggerExample();
+			trigger.triggerMarsBankaltim(txtJamMarsBankaltim.getText(), txtMenitMarsBankaltim.getText());
+		} else {
+			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
+		}
 	}
 
 	private Boolean validateWaktu(JTextField jam, JTextField menit) {
-		Boolean validated = false;
-		if (!jam.getText().isEmpty()) {
-			if (!menit.getText().isEmpty()) {
-				validated = true;
-			}
+		Boolean validated = true;
+		if (jam.getText().trim().isEmpty()) {
+			validated = false;
 		}
+
+		if (menit.getText().trim().isEmpty()) {
+			validated = false;
+		}
+
+		Integer jamInt = Integer.parseInt(jam.getText());
+		Integer menitInt = Integer.parseInt(menit.getText());
+
+		if (jamInt < 0 || jamInt > 24) {
+			validated = false;
+		}
+
+		if (menitInt < 0 || menitInt > 59) {
+			validated = false;
+		}
+
 		return validated;
+	}
+	
+	private NumberFormat setFormattedTextFieldForIntegerOnly(JFormattedTextField textField){
+		NumberFormat format = NumberFormat.getInstance();
+	    NumberFormatter formatter = new NumberFormatter(format);
+	    formatter.setValueClass(Integer.class);
+	    formatter.setMinimum(0);
+	    formatter.setMaximum(59);
+	    formatter.setAllowsInvalid(false);
+	    // If you want the value to be committed on each keystroke instead of focus lost
+	    formatter.setCommitsOnValidEdit(true);
+//	    textField = new JFormattedTextField(format);
+	    return format;
 	}
 
 	private void stopCustomScheduler() {
 		stopButtonClicked(txtJamCustom, txtMenitCustom, btnStartCustom, btnStopCustom);
+		triggerCustom.stopCustom();
 	}
 
 	private void stopDoaPagiScheduler() {
@@ -95,10 +141,12 @@ public class MainFrame extends JFrame {
 
 	private void stopCorporateSongScheduler() {
 		stopButtonClicked(txtJamCorporateSong, txtMenitCorporateSong, btnStartCorporateSong, btnStopCorporateSong);
+		triggerCorporateSong.stopCorporateSong();
 	}
 
 	private void stopMarsBankaltimScheduler() {
 		stopButtonClicked(txtJamMarsBankaltim, txtMenitMarsBankaltim, btnStartMarsBankaltim, btnStopMarsBankaltim);
+		triggerMarsBankaltim.stopMarsBankaltim();
 	}
 
 	private void startButtonClicked(JTextField txtJam, JTextField txtMenit, JButton btnStart, JButton btnStop) {
@@ -123,29 +171,29 @@ public class MainFrame extends JFrame {
 		btnStartDoaPagi = new javax.swing.JButton();
 		btnStopDoaPagi = new javax.swing.JButton();
 		jLabel3 = new javax.swing.JLabel();
-		txtJamDoaPagi = new javax.swing.JTextField();
-		txtMenitDoaPagi = new javax.swing.JTextField();
+		txtJamDoaPagi = new IntegerField();
+		txtMenitDoaPagi = new IntegerField();
 		jLabel10 = new javax.swing.JLabel();
 		panelCorporateSong = new javax.swing.JPanel();
 		btnStartCorporateSong = new javax.swing.JButton();
 		btnStopCorporateSong = new javax.swing.JButton();
 		jLabel5 = new javax.swing.JLabel();
-		txtJamCorporateSong = new javax.swing.JTextField();
-		txtMenitCorporateSong = new javax.swing.JTextField();
+		txtJamCorporateSong = new IntegerField();
+		txtMenitCorporateSong = new IntegerField();
 		jLabel12 = new javax.swing.JLabel();
 		panelMars = new javax.swing.JPanel();
 		btnStartMarsBankaltim = new javax.swing.JButton();
 		btnStopMarsBankaltim = new javax.swing.JButton();
 		jLabel7 = new javax.swing.JLabel();
-		txtJamMarsBankaltim = new javax.swing.JTextField();
-		txtMenitMarsBankaltim = new javax.swing.JTextField();
+		txtJamMarsBankaltim = new IntegerField();
+		txtMenitMarsBankaltim = new IntegerField();
 		jLabel11 = new javax.swing.JLabel();
 		panelCustom = new javax.swing.JPanel();
 		btnStartCustom = new javax.swing.JButton();
 		btnStopCustom = new javax.swing.JButton();
 		jLabel9 = new javax.swing.JLabel();
-		txtJamCustom = new javax.swing.JTextField();
-		txtMenitCustom = new javax.swing.JTextField();
+		txtJamCustom = new IntegerField();
+		txtMenitCustom = new IntegerField(2);
 		jLabel13 = new javax.swing.JLabel();
 		titlePanel = new javax.swing.JPanel();
 		lblTitle = new javax.swing.JLabel();
@@ -447,88 +495,92 @@ public class MainFrame extends JFrame {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
 		mainPanel.add(panelCustom, gridBagConstraints);
-		
-//		panelZuhur.setBorder(javax.swing.BorderFactory.createTitledBorder(
-//				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Custom",
-//				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-//				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-//		panelZuhur.setLayout(new java.awt.GridBagLayout());
-//
-//		btnStartCustom.setText("Start");
-//		btnStartCustom.setPreferredSize(new java.awt.Dimension(57, 35));
-//		btnStartCustom.addActionListener(new java.awt.event.ActionListener() {
-//			public void actionPerformed(java.awt.event.ActionEvent evt) {
-//				startCustomScheduler();
-//			}
-//		});
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 4;
-//		gridBagConstraints.gridy = 2;
-//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-//		panelZuhur.add(btnStartCustom, gridBagConstraints);
-//
-//		btnStopCustom.setText("Stop");
-//		btnStopCustom.setEnabled(false);
-//		btnStopCustom.addActionListener(new java.awt.event.ActionListener() {
-//			public void actionPerformed(java.awt.event.ActionEvent evt) {
-//				stopCustomScheduler();
-//			}
-//		});
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 4;
-//		gridBagConstraints.gridy = 3;
-//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-//		panelZuhur.add(btnStopCustom, gridBagConstraints);
-//
-//		jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-//		jLabel9.setText(":");
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 2;
-//		gridBagConstraints.gridy = 2;
-//		gridBagConstraints.gridheight = 2;
-//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-//		panelZuhur.add(jLabel9, gridBagConstraints);
-//
-//		txtJamCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-//		txtJamCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-//		txtJamCustom.setPreferredSize(new java.awt.Dimension(50, 45));
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 1;
-//		gridBagConstraints.gridy = 2;
-//		gridBagConstraints.gridheight = 2;
-//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-//		panelZuhur.add(txtJamCustom, gridBagConstraints);
-//
-//		txtMenitCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-//		txtMenitCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-//		txtMenitCustom.setPreferredSize(new java.awt.Dimension(50, 45));
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 3;
-//		gridBagConstraints.gridy = 2;
-//		gridBagConstraints.gridheight = 2;
-//		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-//		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-//		panelZuhur.add(txtMenitCustom, gridBagConstraints);
-//
-//		jLabel13.setText("Jam :");
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 0;
-//		gridBagConstraints.gridy = 2;
-//		panelZuhur.add(jLabel13, gridBagConstraints);
-//
-//		gridBagConstraints = new java.awt.GridBagConstraints();
-//		gridBagConstraints.gridx = 0;
-//		gridBagConstraints.gridy = 2;
-//		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-//		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-//		mainPanel.add(panelZuhur, gridBagConstraints);
+
+		// panelZuhur.setBorder(javax.swing.BorderFactory.createTitledBorder(
+		// new
+		// javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED),
+		// "Custom",
+		// javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+		// javax.swing.border.TitledBorder.DEFAULT_POSITION,
+		// new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+		// panelZuhur.setLayout(new java.awt.GridBagLayout());
+		//
+		// btnStartCustom.setText("Start");
+		// btnStartCustom.setPreferredSize(new java.awt.Dimension(57, 35));
+		// btnStartCustom.addActionListener(new java.awt.event.ActionListener()
+		// {
+		// public void actionPerformed(java.awt.event.ActionEvent evt) {
+		// startCustomScheduler();
+		// }
+		// });
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 4;
+		// gridBagConstraints.gridy = 2;
+		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		// panelZuhur.add(btnStartCustom, gridBagConstraints);
+		//
+		// btnStopCustom.setText("Stop");
+		// btnStopCustom.setEnabled(false);
+		// btnStopCustom.addActionListener(new java.awt.event.ActionListener() {
+		// public void actionPerformed(java.awt.event.ActionEvent evt) {
+		// stopCustomScheduler();
+		// }
+		// });
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 4;
+		// gridBagConstraints.gridy = 3;
+		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		// panelZuhur.add(btnStopCustom, gridBagConstraints);
+		//
+		// jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+		// jLabel9.setText(":");
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 2;
+		// gridBagConstraints.gridy = 2;
+		// gridBagConstraints.gridheight = 2;
+		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		// panelZuhur.add(jLabel9, gridBagConstraints);
+		//
+		// txtJamCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		// txtJamCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		// txtJamCustom.setPreferredSize(new java.awt.Dimension(50, 45));
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 1;
+		// gridBagConstraints.gridy = 2;
+		// gridBagConstraints.gridheight = 2;
+		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		// panelZuhur.add(txtJamCustom, gridBagConstraints);
+		//
+		// txtMenitCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		// txtMenitCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		// txtMenitCustom.setPreferredSize(new java.awt.Dimension(50, 45));
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 3;
+		// gridBagConstraints.gridy = 2;
+		// gridBagConstraints.gridheight = 2;
+		// gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		// panelZuhur.add(txtMenitCustom, gridBagConstraints);
+		//
+		// jLabel13.setText("Jam :");
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 0;
+		// gridBagConstraints.gridy = 2;
+		// panelZuhur.add(jLabel13, gridBagConstraints);
+		//
+		// gridBagConstraints = new java.awt.GridBagConstraints();
+		// gridBagConstraints.gridx = 0;
+		// gridBagConstraints.gridy = 2;
+		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		// gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+		// mainPanel.add(panelZuhur, gridBagConstraints);
 
 		getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
 		titlePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
 		lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		lblTitle.setText("jLabel1");
+		lblTitle.setText("Task Scheduler");
 		titlePanel.add(lblTitle);
 
 		getContentPane().add(titlePanel, java.awt.BorderLayout.NORTH);
@@ -562,13 +614,13 @@ public class MainFrame extends JFrame {
 	private javax.swing.JPanel panelDoaPagi;
 	private javax.swing.JPanel panelMars;
 	private javax.swing.JPanel titlePanel;
-	private javax.swing.JTextField txtJamCorporateSong;
-	private javax.swing.JTextField txtJamCustom;
-	private javax.swing.JTextField txtJamDoaPagi;
-	private javax.swing.JTextField txtJamMarsBankaltim;
-	private javax.swing.JTextField txtMenitCorporateSong;
-	private javax.swing.JTextField txtMenitCustom;
-	private javax.swing.JTextField txtMenitDoaPagi;
-	private javax.swing.JTextField txtMenitMarsBankaltim;
+	private IntegerField txtJamCorporateSong;
+	private IntegerField txtJamCustom;
+	private IntegerField txtJamDoaPagi;
+	private IntegerField txtJamMarsBankaltim;
+	private IntegerField txtMenitCorporateSong;
+	private IntegerField txtMenitCustom;
+	private IntegerField txtMenitDoaPagi;
+	private IntegerField txtMenitMarsBankaltim;
 
 }

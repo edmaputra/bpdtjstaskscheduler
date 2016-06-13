@@ -8,6 +8,8 @@ import static org.quartz.TriggerBuilder.newTrigger;
 import org.quartz.InterruptableJob;
 import org.quartz.Job;
 import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -60,11 +62,7 @@ public class SimpleTriggerExample {
 		}
 	}
 
-	public void triggerDoaPagiInterruptable() {
-		// intJobDoaPagi = newJob(DoaJob.class).wi
-	}
-
-	public void triggerDoaPagi(String hour, String minute) {
+	public void triggerDoaPagi(String hour, String minute) {	
 		jobDoaPagi = newJob(DoaJob.class).withIdentity(JOB_NAME_DOA_PAGI,"group1").build();
 		Trigger trigger = setTrigger(jobDoaPagi, hour, minute, TRIGGER_NAME_DOA_PAGI, "group1");
 		startEachScheduler(schedulerDoaPagi, jobDoaPagi, trigger);
@@ -90,7 +88,7 @@ public class SimpleTriggerExample {
 
 	public void stopDoaPagi() {
 		try {
-			stopScheduler(schedulerDoaPagi, jobDoaPagi);
+			stopScheduler(schedulerDoaPagi);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,7 +97,7 @@ public class SimpleTriggerExample {
 	
 	public void stopCorporateSong() {
 		try {
-			stopScheduler(schedulerCorporateSong, jobCorporateSong);
+			stopScheduler(schedulerCorporateSong);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,7 +106,7 @@ public class SimpleTriggerExample {
 	
 	public void stopMarsBankaltim() {
 		try {
-			stopScheduler(schedulerMarsBankaltim, jobMarsBankaltim);
+			stopScheduler(schedulerMarsBankaltim);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,7 +115,7 @@ public class SimpleTriggerExample {
 	
 	public void stopCustom() {
 		try {
-			stopScheduler(schedulerCustom, jobCustom);
+			stopScheduler(schedulerCustom);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,7 +124,7 @@ public class SimpleTriggerExample {
 	
 	public void stopDzuhur() {
 		try {
-			stopScheduler(schedulerDzuhur, jobDzuhur);
+			stopScheduler(schedulerDzuhur);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,7 +133,7 @@ public class SimpleTriggerExample {
 	
 	public void stopAshar() {
 		try {
-			stopScheduler(schedulerAsar, jobAsar);
+			stopScheduler(schedulerAsar);
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,9 +150,8 @@ public class SimpleTriggerExample {
 		}
 	}
 
-	public void stopScheduler(Scheduler scheduler, JobDetail job)
+	public void stopScheduler(Scheduler scheduler)
 			throws SchedulerException {
-		// scheduler.interrupt(JobKey.jobKey(JOB_NAME_DOA_PAGI, "group1"));
 		scheduler.shutdown(true);
 	}
 
