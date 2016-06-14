@@ -1,13 +1,11 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
-import java.text.NumberFormat;
-
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.NumberFormatter;
 
 public class MainFrame extends JFrame {
 
@@ -52,7 +50,8 @@ public class MainFrame extends JFrame {
 
 	private void startCustomScheduler() {
 		if (validateWaktu(txtJamCustom, txtMenitCustom)) {
-			startButtonClicked(txtJamCustom, txtMenitCustom, btnStartCustom, btnStopCustom);
+			startButtonClicked(txtJamCustom, txtMenitCustom, btnStartCustom,
+					btnStopCustom);
 			SimpleTriggerExample trigger = new SimpleTriggerExample();
 			// trigger.triggerCobaCustom(txtJamCustom.getText(),
 			// txtMenitCustom.getText());
@@ -63,9 +62,11 @@ public class MainFrame extends JFrame {
 
 	private void startDoaPagiScheduler() {
 		if (validateWaktu(txtJamDoaPagi, txtMenitDoaPagi)) {
-			startButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi, btnStopDoaPagi);
+			startButtonClicked(txtJamDoaPagi, txtMenitDoaPagi, btnStartDoaPagi,
+					btnStopDoaPagi);
 			triggerDoaPagi = new SimpleTriggerExample();
-			triggerDoaPagi.triggerDoaPagi(txtJamDoaPagi.getText(), txtMenitDoaPagi.getText());
+			triggerDoaPagi.startDoaPagi(txtJamDoaPagi.getText(),
+					txtMenitDoaPagi.getText());
 		} else {
 			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
 		}
@@ -73,9 +74,11 @@ public class MainFrame extends JFrame {
 
 	private void startCorporateSongScheduler() {
 		if (validateWaktu(txtJamCorporateSong, txtMenitCorporateSong)) {
-			startButtonClicked(txtJamCorporateSong, txtMenitCorporateSong, btnStartCorporateSong, btnStopCorporateSong);
-			SimpleTriggerExample trigger = new SimpleTriggerExample();
-			trigger.triggerCorporateSong(txtJamCorporateSong.getText(), txtMenitCorporateSong.getText());
+			startButtonClicked(txtJamCorporateSong, txtMenitCorporateSong,
+					btnStartCorporateSong, btnStopCorporateSong);
+			triggerCorporateSong = new SimpleTriggerExample();
+			triggerCorporateSong.startCorporateSong(txtJamCorporateSong.getText(),
+					txtMenitCorporateSong.getText());
 		} else {
 			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
 		}
@@ -84,12 +87,36 @@ public class MainFrame extends JFrame {
 
 	private void startMarsBankaltimScheduler() {
 		if (validateWaktu(txtJamMarsBankaltim, txtMenitMarsBankaltim)) {
-			startButtonClicked(txtJamMarsBankaltim, txtMenitMarsBankaltim, btnStartMarsBankaltim, btnStopMarsBankaltim);
-			SimpleTriggerExample trigger = new SimpleTriggerExample();
-			trigger.triggerMarsBankaltim(txtJamMarsBankaltim.getText(), txtMenitMarsBankaltim.getText());
+			startButtonClicked(txtJamMarsBankaltim, txtMenitMarsBankaltim,
+					btnStartMarsBankaltim, btnStopMarsBankaltim);
+			triggerMarsBankaltim = new SimpleTriggerExample();
+			triggerMarsBankaltim.startMarsBankaltimScheduler(txtJamMarsBankaltim.getText(),
+					txtMenitMarsBankaltim.getText());
 		} else {
 			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
 		}
+	}
+	
+	private void startDzuhurScheduler(){
+		if (validateWaktu(txtJamDzuhur, txtMenitDzuhur)) {
+			startButtonClicked(txtJamDzuhur, txtMenitDzuhur, btnStartDzuhur, btnStopDzuhur);
+			triggerDzuhur = new SimpleTriggerExample();
+//			triggerDzuhur.(txtJamDzuhur.getText(), txtMenitDzuhur.getText());
+		} else {
+			JOptionPane.showMessageDialog(this, "Harap Isi Waktu dengan Benar");
+		}
+	}
+	
+	private void stopDzuhurScheduler(){
+		
+	}
+	
+	private void startAsarScheduler(){
+		
+	}
+	
+	private void stopAsarScheduler(){
+		
 	}
 
 	private Boolean validateWaktu(JTextField jam, JTextField menit) {
@@ -114,19 +141,6 @@ public class MainFrame extends JFrame {
 		}
 
 		return validated;
-	}
-	
-	private NumberFormat setFormattedTextFieldForIntegerOnly(JFormattedTextField textField){
-		NumberFormat format = NumberFormat.getInstance();
-	    NumberFormatter formatter = new NumberFormatter(format);
-	    formatter.setValueClass(Integer.class);
-	    formatter.setMinimum(0);
-	    formatter.setMaximum(59);
-	    formatter.setAllowsInvalid(false);
-	    // If you want the value to be committed on each keystroke instead of focus lost
-	    formatter.setCommitsOnValidEdit(true);
-//	    textField = new JFormattedTextField(format);
-	    return format;
 	}
 
 	private void stopCustomScheduler() {
@@ -197,14 +211,30 @@ public class MainFrame extends JFrame {
 		jLabel13 = new javax.swing.JLabel();
 		titlePanel = new javax.swing.JPanel();
 		lblTitle = new javax.swing.JLabel();
+		lblJamAsar = new JLabel();
+		lblJamDzuhur = new JLabel();
+		lblDzuhur = new JLabel();
+		lblAsar = new JLabel();
+		txtJamAsar = new IntegerField();
+		txtJamDzuhur = new IntegerField();
+		txtMenitAsar = new IntegerField();
+		txtMenitDzuhur = new IntegerField();
+		btnStartAsar = new JButton();
+		btnStartDzuhur = new JButton();
+		btnStopAsar = new JButton();
+		btnStopDzuhur = new JButton();
+		panelDzuhur = new JPanel();
+		panelAsar = new JPanel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		mainPanel.setLayout(new java.awt.GridBagLayout());
 
 		panelDoaPagi.setBorder(javax.swing.BorderFactory.createTitledBorder(
-				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "DOA PAGI",
-				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED), "DOA PAGI",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
 				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 		panelDoaPagi.setLayout(new java.awt.GridBagLayout());
 
@@ -275,19 +305,23 @@ public class MainFrame extends JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
 		mainPanel.add(panelDoaPagi, gridBagConstraints);
 
-		panelCorporateSong.setBorder(javax.swing.BorderFactory.createTitledBorder(
-				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "CORPORATE SONG",
-				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+		panelCorporateSong.setBorder(javax.swing.BorderFactory
+				.createTitledBorder(new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED),
+						"CORPORATE SONG",
+						javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+						javax.swing.border.TitledBorder.DEFAULT_POSITION,
+						new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 		panelCorporateSong.setLayout(new java.awt.GridBagLayout());
 
 		btnStartCorporateSong.setText("Start");
 		btnStartCorporateSong.setPreferredSize(new java.awt.Dimension(57, 35));
-		btnStartCorporateSong.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				startCorporateSongScheduler();
-			}
-		});
+		btnStartCorporateSong
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						startCorporateSongScheduler();
+					}
+				});
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 2;
@@ -296,11 +330,12 @@ public class MainFrame extends JFrame {
 
 		btnStopCorporateSong.setText("Stop");
 		btnStopCorporateSong.setEnabled(false);
-		btnStopCorporateSong.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				stopCorporateSongScheduler();
-			}
-		});
+		btnStopCorporateSong
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						stopCorporateSongScheduler();
+					}
+				});
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 3;
@@ -317,7 +352,8 @@ public class MainFrame extends JFrame {
 		panelCorporateSong.add(jLabel5, gridBagConstraints);
 
 		txtJamCorporateSong.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		txtJamCorporateSong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtJamCorporateSong
+				.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		txtJamCorporateSong.setPreferredSize(new java.awt.Dimension(50, 45));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -327,7 +363,8 @@ public class MainFrame extends JFrame {
 		panelCorporateSong.add(txtJamCorporateSong, gridBagConstraints);
 
 		txtMenitCorporateSong.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		txtMenitCorporateSong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtMenitCorporateSong
+				.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		txtMenitCorporateSong.setPreferredSize(new java.awt.Dimension(50, 45));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
@@ -349,18 +386,22 @@ public class MainFrame extends JFrame {
 		mainPanel.add(panelCorporateSong, gridBagConstraints);
 
 		panelMars.setBorder(javax.swing.BorderFactory.createTitledBorder(
-				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "MARS BANKALTIM",
-				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED),
+				"MARS BANKALTIM",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
 				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 		panelMars.setLayout(new java.awt.GridBagLayout());
 
 		btnStartMarsBankaltim.setText("Start");
 		btnStartMarsBankaltim.setPreferredSize(new java.awt.Dimension(57, 35));
-		btnStartMarsBankaltim.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				startMarsBankaltimScheduler();
-			}
-		});
+		btnStartMarsBankaltim
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						startMarsBankaltimScheduler();
+					}
+				});
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 2;
@@ -369,11 +410,12 @@ public class MainFrame extends JFrame {
 
 		btnStopMarsBankaltim.setText("Stop");
 		btnStopMarsBankaltim.setEnabled(false);
-		btnStopMarsBankaltim.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				stopMarsBankaltimScheduler();
-			}
-		});
+		btnStopMarsBankaltim
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						stopMarsBankaltimScheduler();
+					}
+				});
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 3;
@@ -390,7 +432,8 @@ public class MainFrame extends JFrame {
 		panelMars.add(jLabel7, gridBagConstraints);
 
 		txtJamMarsBankaltim.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		txtJamMarsBankaltim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtJamMarsBankaltim
+				.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		txtJamMarsBankaltim.setPreferredSize(new java.awt.Dimension(50, 45));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -400,7 +443,8 @@ public class MainFrame extends JFrame {
 		panelMars.add(txtJamMarsBankaltim, gridBagConstraints);
 
 		txtMenitMarsBankaltim.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		txtMenitMarsBankaltim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtMenitMarsBankaltim
+				.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		txtMenitMarsBankaltim.setPreferredSize(new java.awt.Dimension(50, 45));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
@@ -422,8 +466,10 @@ public class MainFrame extends JFrame {
 		mainPanel.add(panelMars, gridBagConstraints);
 
 		panelCustom.setBorder(javax.swing.BorderFactory.createTitledBorder(
-				new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Custom",
-				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED), "Custom",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
 				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 		panelCustom.setLayout(new java.awt.GridBagLayout());
 
@@ -496,88 +542,164 @@ public class MainFrame extends JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
 		mainPanel.add(panelCustom, gridBagConstraints);
 
-		// panelZuhur.setBorder(javax.swing.BorderFactory.createTitledBorder(
-		// new
-		// javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED),
-		// "Custom",
-		// javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-		// javax.swing.border.TitledBorder.DEFAULT_POSITION,
-		// new java.awt.Font("Tahoma", 0, 14))); // NOI18N
-		// panelZuhur.setLayout(new java.awt.GridBagLayout());
-		//
-		// btnStartCustom.setText("Start");
-		// btnStartCustom.setPreferredSize(new java.awt.Dimension(57, 35));
-		// btnStartCustom.addActionListener(new java.awt.event.ActionListener()
-		// {
-		// public void actionPerformed(java.awt.event.ActionEvent evt) {
-		// startCustomScheduler();
-		// }
-		// });
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 4;
-		// gridBagConstraints.gridy = 2;
-		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		// panelZuhur.add(btnStartCustom, gridBagConstraints);
-		//
-		// btnStopCustom.setText("Stop");
-		// btnStopCustom.setEnabled(false);
-		// btnStopCustom.addActionListener(new java.awt.event.ActionListener() {
-		// public void actionPerformed(java.awt.event.ActionEvent evt) {
-		// stopCustomScheduler();
-		// }
-		// });
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 4;
-		// gridBagConstraints.gridy = 3;
-		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		// panelZuhur.add(btnStopCustom, gridBagConstraints);
-		//
-		// jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-		// jLabel9.setText(":");
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 2;
-		// gridBagConstraints.gridy = 2;
-		// gridBagConstraints.gridheight = 2;
-		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-		// panelZuhur.add(jLabel9, gridBagConstraints);
-		//
-		// txtJamCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		// txtJamCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-		// txtJamCustom.setPreferredSize(new java.awt.Dimension(50, 45));
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 1;
-		// gridBagConstraints.gridy = 2;
-		// gridBagConstraints.gridheight = 2;
-		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-		// panelZuhur.add(txtJamCustom, gridBagConstraints);
-		//
-		// txtMenitCustom.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-		// txtMenitCustom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-		// txtMenitCustom.setPreferredSize(new java.awt.Dimension(50, 45));
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 3;
-		// gridBagConstraints.gridy = 2;
-		// gridBagConstraints.gridheight = 2;
-		// gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-		// gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-		// panelZuhur.add(txtMenitCustom, gridBagConstraints);
-		//
-		// jLabel13.setText("Jam :");
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 0;
-		// gridBagConstraints.gridy = 2;
-		// panelZuhur.add(jLabel13, gridBagConstraints);
-		//
-		// gridBagConstraints = new java.awt.GridBagConstraints();
-		// gridBagConstraints.gridx = 0;
-		// gridBagConstraints.gridy = 2;
-		// gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		// gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-		// mainPanel.add(panelZuhur, gridBagConstraints);
+		panelDzuhur.setBorder(javax.swing.BorderFactory.createTitledBorder(
+				new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED), "Dzuhur",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+		panelDzuhur.setLayout(new java.awt.GridBagLayout());
+
+		btnStartDzuhur.setText("Start");
+		btnStartDzuhur.setPreferredSize(new java.awt.Dimension(57, 35));
+		btnStartDzuhur.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				startDzuhurScheduler();
+			}
+		});
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		panelDzuhur.add(btnStartDzuhur, gridBagConstraints);
+
+		btnStopDzuhur.setText("Stop");
+		btnStopDzuhur.setEnabled(false);
+		btnStopDzuhur.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				stopDzuhurScheduler();
+			}
+		});
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		panelDzuhur.add(btnStopDzuhur, gridBagConstraints);
+
+		lblDzuhur.setFont(new java.awt.Font("Tahoma", 1, 24));
+		lblDzuhur.setText(":");
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelDzuhur.add(lblDzuhur, gridBagConstraints);
+
+		txtJamDzuhur.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		txtJamDzuhur.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtJamDzuhur.setPreferredSize(new java.awt.Dimension(50, 45));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelDzuhur.add(txtJamDzuhur, gridBagConstraints);
+
+		txtMenitDzuhur.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		txtMenitDzuhur.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtMenitDzuhur.setPreferredSize(new java.awt.Dimension(50, 45));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelDzuhur.add(txtMenitDzuhur, gridBagConstraints);
+
+		lblJamDzuhur.setText("Jam :");
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		panelDzuhur.add(lblJamDzuhur, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+		mainPanel.add(panelDzuhur, gridBagConstraints);
+		
+		panelAsar.setBorder(javax.swing.BorderFactory.createTitledBorder(
+				new javax.swing.border.SoftBevelBorder(
+						javax.swing.border.BevelBorder.RAISED), "Asar",
+				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+				javax.swing.border.TitledBorder.DEFAULT_POSITION,
+				new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+		panelAsar.setLayout(new java.awt.GridBagLayout());
+
+		btnStartAsar.setText("Start");
+		btnStartAsar.setPreferredSize(new java.awt.Dimension(57, 35));
+		btnStartAsar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				startAsarScheduler();
+			}
+		});
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		panelAsar.add(btnStartAsar, gridBagConstraints);
+
+		btnStopAsar.setText("Stop");
+		btnStopAsar.setEnabled(false);
+		btnStopAsar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				stopAsarScheduler();
+			}
+		});
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		panelAsar.add(btnStopAsar, gridBagConstraints);
+
+		lblAsar.setFont(new java.awt.Font("Tahoma", 1, 24));
+		lblAsar.setText(":");
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelAsar.add(lblAsar, gridBagConstraints);
+
+		txtJamAsar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		txtJamAsar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtJamAsar.setPreferredSize(new java.awt.Dimension(50, 45));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelAsar.add(txtJamAsar, gridBagConstraints);
+
+		txtMenitAsar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+		txtMenitAsar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		txtMenitAsar.setPreferredSize(new java.awt.Dimension(50, 45));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		panelAsar.add(txtMenitAsar, gridBagConstraints);
+
+		lblJamAsar.setText("Jam :");
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		panelAsar.add(lblJamAsar, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+		mainPanel.add(panelAsar, gridBagConstraints);
 
 		getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
-		titlePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+		titlePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,
+				10, 5));
 
 		lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 		lblTitle.setText("Task Scheduler");
@@ -593,10 +715,18 @@ public class MainFrame extends JFrame {
 	private javax.swing.JButton btnStartCustom;
 	private javax.swing.JButton btnStartDoaPagi;
 	private javax.swing.JButton btnStartMarsBankaltim;
+	private javax.swing.JButton btnStartDzuhur;
+	private javax.swing.JButton btnStartAsar;
 	private javax.swing.JButton btnStopCorporateSong;
 	private javax.swing.JButton btnStopCustom;
 	private javax.swing.JButton btnStopDoaPagi;
 	private javax.swing.JButton btnStopMarsBankaltim;
+	private javax.swing.JButton btnStopDzuhur;
+	private javax.swing.JButton btnStopAsar;
+	private javax.swing.JLabel lblJamAsar;
+	private javax.swing.JLabel lblJamDzuhur;
+	private JLabel lblDzuhur;
+	private JLabel lblAsar;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
 	private javax.swing.JLabel jLabel12;
@@ -609,7 +739,7 @@ public class MainFrame extends JFrame {
 	private javax.swing.JPanel mainPanel;
 	private javax.swing.JPanel panelCorporateSong;
 	private javax.swing.JPanel panelCustom;
-	private javax.swing.JPanel panelZuhur;
+	private javax.swing.JPanel panelDzuhur;
 	private javax.swing.JPanel panelAsar;
 	private javax.swing.JPanel panelDoaPagi;
 	private javax.swing.JPanel panelMars;
@@ -622,5 +752,8 @@ public class MainFrame extends JFrame {
 	private IntegerField txtMenitCustom;
 	private IntegerField txtMenitDoaPagi;
 	private IntegerField txtMenitMarsBankaltim;
-
+	private IntegerField txtJamDzuhur;
+	private IntegerField txtMenitDzuhur;
+	private IntegerField txtJamAsar;
+	private IntegerField txtMenitAsar;
 }

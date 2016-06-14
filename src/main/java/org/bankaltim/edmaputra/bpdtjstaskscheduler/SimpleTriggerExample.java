@@ -2,15 +2,9 @@ package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import org.quartz.InterruptableJob;
-import org.quartz.Job;
 import org.quartz.JobDetail;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
@@ -39,8 +33,6 @@ public class SimpleTriggerExample {
 	private JobDetail jobAsar;
 	private JobDetail jobCustom;
 
-	private InterruptableJob intJobDoaPagi;
-
 	private Scheduler schedulerDoaPagi;
 	private Scheduler schedulerCorporateSong;
 	private Scheduler schedulerMarsBankaltim;
@@ -62,28 +54,40 @@ public class SimpleTriggerExample {
 		}
 	}
 
-	public void triggerDoaPagi(String hour, String minute) {	
+	public void startDoaPagi(String hour, String minute) {	
 		jobDoaPagi = newJob(DoaJob.class).withIdentity(JOB_NAME_DOA_PAGI,"group1").build();
 		Trigger trigger = setTrigger(jobDoaPagi, hour, minute, TRIGGER_NAME_DOA_PAGI, "group1");
 		startEachScheduler(schedulerDoaPagi, jobDoaPagi, trigger);
 	}
 
-	public void triggerCorporateSong(String hour, String minute) {
+	public void startCorporateSong(String hour, String minute) {
 		jobCorporateSong = newJob(CorporateSongJob.class).withIdentity(JOB_NAME_CORPORATE_SONG, "group1").build();
 		Trigger trigger = setTrigger(jobCorporateSong, hour, minute, TRIGGER_NAME_CORPORATE_SONG, "group1");
 		startEachScheduler(schedulerCorporateSong, jobCorporateSong, trigger);
 	}
 
-	public void triggerMarsBankaltim(String hour, String minute) {
+	public void startMarsBankaltimScheduler(String hour, String minute) {
 		jobMarsBankaltim = newJob(MarsBankaltimJob.class).withIdentity(JOB_NAME_MARS_BANKALTIM, "group1").build();
 		Trigger trigger = setTrigger(jobMarsBankaltim, hour, minute, TRIGGER_NAME_MARS_BANKALTIM, "group1");
 		startEachScheduler(schedulerMarsBankaltim, jobMarsBankaltim, trigger);
 	}
 
-	public void triggerCustom(String hour, String minute) {
+	public void startCustomScheduler(String hour, String minute) {
 		jobCustom = newJob(CustomJob.class).withIdentity(JOB_NAME_CUSTOM, "group1").build();
 		Trigger trigger = setTrigger(jobCustom, hour, minute, TRIGGER_NAME_CUSTOM, "group1");
 		startEachScheduler(schedulerCustom, jobCustom, trigger);
+	}
+	
+	public void startAsarScheduler(String hour, String minute) {
+		jobAsar = newJob(AsarJob.class).withIdentity(JOB_NAME_ASAR, "group1").build();
+		Trigger trigger = setTrigger(jobAsar, hour, minute, TRIGGER_NAME_ASAR, "group1");
+		startEachScheduler(schedulerAsar, jobAsar, trigger);
+	}
+	
+	public void startDzuhurScheduler(String hour, String minute) {
+		jobDzuhur = newJob(DzuhurJob.class).withIdentity(JOB_NAME_DZUHUR, "group1").build();
+		Trigger trigger = setTrigger(jobDzuhur, hour, minute, TRIGGER_NAME_DZUHUR, "group1");
+		startEachScheduler(schedulerDzuhur, jobDzuhur, trigger);
 	}
 
 	public void stopDoaPagi() {
