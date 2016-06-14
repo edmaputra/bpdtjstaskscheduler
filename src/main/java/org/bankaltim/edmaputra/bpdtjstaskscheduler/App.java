@@ -11,14 +11,14 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class App implements Runnable {
 	
-	private MainFrame form;
+//	private MainFrame form;
 //	private CobaScheduler coba;
-//	private CobaFrame cobaFrame;
+	private CobaFrame cobaFrame;
 
     public App() {
-        form = new MainFrame();
+//        form = new MainFrame();
 //    	coba = new CobaScheduler();
-//    	cobaFrame = new CobaFrame();
+    	cobaFrame = new CobaFrame();
     }
 
     public void start() {
@@ -27,9 +27,9 @@ public class App implements Runnable {
 
 //    @Override
     public void run() {
-        form.setVisible(true);
-//    	cobaFrame.setSize(new Dimension(500,300));
-//    	cobaFrame.setVisible(true);
+//        form.setVisible(true);
+    	cobaFrame.setSize(new Dimension(500,300));
+    	cobaFrame.setVisible(true);
     	
     }
 

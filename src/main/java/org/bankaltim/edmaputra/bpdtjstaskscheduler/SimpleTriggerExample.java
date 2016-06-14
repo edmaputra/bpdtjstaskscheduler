@@ -159,8 +159,7 @@ public class SimpleTriggerExample {
 		scheduler.shutdown(true);
 	}
 
-	private Trigger setTrigger(JobDetail job, String hour, String minute,
-			String triggerName, String groupName) {
+	private Trigger setTrigger(JobDetail job, String hour, String minute, String triggerName, String groupName) {
 		Trigger trigger = newTrigger().withIdentity(triggerName, groupName)
 				.withSchedule(cronSchedule(setCronExpression(hour, minute)))
 				.forJob(job).build();

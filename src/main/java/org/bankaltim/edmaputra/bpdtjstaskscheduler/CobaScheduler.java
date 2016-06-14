@@ -4,7 +4,10 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import org.quartz.Job;
 import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
@@ -17,8 +20,24 @@ public class CobaScheduler {
 	Scheduler sched;
 	JobDetail job;
 	Trigger trigger;
+	
+	private String path;
+	private Job jobs;
+	
 
 	public CobaScheduler() {
+	}
+	
+	public CobaScheduler(String path){
+		jobs = new Job() {
+			
+			@Override
+			public void execute(JobExecutionContext arg0) throws JobExecutionException {
+				// TODO Auto-generated method stub
+				Song song = new Song();
+				song.playMp3File(path);
+			}
+		}; 
 	}
 
 	public void runScheduler() throws SchedulerException {
@@ -59,14 +78,14 @@ public class CobaScheduler {
 		sched.shutdown();
 	}
 
-	// public static void main(String[] args){
-	// CobaScheduler coba = new CobaScheduler();
-	// try {
-	// coba.runScheduler();
-	// } catch (SchedulerException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
+	
 
 }

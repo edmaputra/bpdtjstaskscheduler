@@ -16,7 +16,7 @@ public class CobaFrame extends JFrame {
 	private CobaScheduler cobaScheduler;
 
 	public CobaFrame() {
-		cobaScheduler = new CobaScheduler();
+		cobaScheduler = new CobaScheduler(DefaultValue.doaPagiDir);
 		initComponents();
 //		start();
 	}
