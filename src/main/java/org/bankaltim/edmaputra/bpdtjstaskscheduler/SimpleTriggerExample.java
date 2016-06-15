@@ -156,7 +156,7 @@ public class SimpleTriggerExample {
 
 	public void stopScheduler(Scheduler scheduler)
 			throws SchedulerException {
-		scheduler.shutdown(true);
+		scheduler.shutdown();
 	}
 
 	private Trigger setTrigger(JobDetail job, String hour, String minute, String triggerName, String groupName) {
@@ -167,8 +167,8 @@ public class SimpleTriggerExample {
 	}
 
 	private String setCronExpression(String hour, String minute) {
-		// return "0 " + minute + " " + hour + " ? * MON-FRI *";
-		return "0 " + minute + " " + hour + " 1/1 * ? *";
+		 return "0 " + minute + " " + hour + " ? * MON-FRI *";
+//		return "0 " + minute + " " + hour + " 1/1 * ? *";
 	}
 	
 //	public void triggerCobaCustom(String hour, String minute) {

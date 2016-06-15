@@ -16,7 +16,7 @@ public class CobaFrame extends JFrame {
 	private CobaScheduler cobaScheduler;
 
 	public CobaFrame() {
-		cobaScheduler = new CobaScheduler(DefaultValue.doaPagiDir);
+		cobaScheduler = new CobaScheduler();
 		initComponents();
 //		start();
 	}
@@ -44,7 +44,7 @@ public class CobaFrame extends JFrame {
 
 	private void stop() {
 		try {
-			cobaScheduler.interruptScheduler();
+			cobaScheduler.stopScheduler();
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +53,8 @@ public class CobaFrame extends JFrame {
 
 	private void start() {
 		try {
-			cobaScheduler.runScheduler();
+			cobaScheduler.setPath(DefaultValue.doaPagiDir);
+			cobaScheduler.runScheduler("10","10");
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

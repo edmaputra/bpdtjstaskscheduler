@@ -1,81 +1,74 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
+import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import org.quartz.Job;
 import org.quartz.JobDetail;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class CobaScheduler {
 
-	SchedulerFactory sf;
-	Scheduler sched;
-	JobDetail job;
-	Trigger trigger;
-	
+	private Scheduler scheduler;
+	private JobDetail job;
+	private Trigger trigger;
+
 	private String path;
-	private Job jobs;
+	
+	private String jobName;
+	private String jobGroup;
+	private String triggerName;
+	private String triggerGroup;
 	
 
 	public CobaScheduler() {
 	}
 	
-	public CobaScheduler(String path){
-		jobs = new Job() {
-			
-			@Override
-			public void execute(JobExecutionContext arg0) throws JobExecutionException {
-				// TODO Auto-generated method stub
-				Song song = new Song();
-				song.playMp3File(path);
-			}
-		}; 
+	public CobaScheduler(String jobName, String jobGroup, String triggerName, String triggerGroup){
+		this.jobName = jobName;
+		this.jobGroup = jobGroup;
+		this.triggerName = triggerName;
+		this.triggerGroup = triggerGroup;
 	}
 
-	public void runScheduler() throws SchedulerException {
+	public void runScheduler(String hour, String minute) throws SchedulerException {
 
-		// final Logger log = LoggerFactory.getLogger(CobaScheduler.class);
+		job = newJob(CobaJob.class).withIdentity(jobName, jobGroup).build();
 
-		// log.info("------- Initializing ----------------------");
+		trigger = setTrigger(job, hour, minute, triggerName, triggerGroup);
 
-		// First we must get a reference to a scheduler
-
-		// log.info("------- Initialization Complete -----------");
-
-		// log.info("------- Scheduling Jobs -------------------");
-
-		// get a "nice round" time a few seconds in the future...
-
-		job = newJob(CobaJob.class).withIdentity("coba", "cobagroup").build();
-		trigger = newTrigger()
-				.withIdentity("trigger1", "triggerGroup1")
-				.withSchedule(
-						simpleSchedule().withIntervalInSeconds(2000)
-								.repeatForever()).build();
-
-		sf = new StdSchedulerFactory();
-		sched = sf.getScheduler();
-
-		sched.start();
-		sched.scheduleJob(job, trigger);
-		System.out.println("Started");
-		// log.info("Scheduler thread's name: " +
-		// Thread.currentThread().getName());
-		// log.info("------- Started Scheduler -----------------");
+		scheduler = new StdSchedulerFactory().getScheduler();
+		startEachScheduler(scheduler, job, trigger, path);
 	}
 
-	public void interruptScheduler() throws SchedulerException {		
-//		sched.interrupt(job.getKey());
-		System.out.println("Interrupted");
-		sched.shutdown();
+	public void stopScheduler() throws SchedulerException {
+		scheduler.shutdown();
+	}
+
+	private Trigger setTrigger(JobDetail job, String hour, String minute, String triggerName, String groupName) {
+		Trigger trigger = newTrigger().withIdentity(triggerName, groupName)
+				.withSchedule(cronSchedule(setCronExpression(hour, minute))).forJob(job).build();
+		return trigger;
+	}
+
+	private String setCronExpression(String hour, String minute) {
+		return "0 " + minute + " " + hour + " ? * MON-FRI *";
+		// return "0 " + minute + " " + hour + " 1/1 * ? *";
+	}
+
+	private void startEachScheduler(Scheduler scheduler, JobDetail job, Trigger trigger, String path) {
+		try {
+			scheduler.getContext().put("path", path);
+			scheduler.scheduleJob(job, trigger);
+			scheduler.start();
+			System.out.println("Started");
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getPath() {
@@ -85,7 +78,45 @@ public class CobaScheduler {
 	public void setPath(String path) {
 		this.path = path;
 	}
+
+	public String getJobName() {
+		return jobName;
+	}
 	
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+	
+
+	public String getJobGroup() {
+		return jobGroup;
+	}
+	
+
+	public void setJobGroup(String jobGroup) {
+		this.jobGroup = jobGroup;
+	}
+	
+
+	public String getTriggerName() {
+		return triggerName;
+	}
+	
+
+	public void setTriggerName(String triggerName) {
+		this.triggerName = triggerName;
+	}
+	
+
+	public String getTriggerGroup() {
+		return triggerGroup;
+	}
+	
+
+	public void setTriggerGroup(String triggerGroup) {
+		this.triggerGroup = triggerGroup;
+	}
 	
 
 }

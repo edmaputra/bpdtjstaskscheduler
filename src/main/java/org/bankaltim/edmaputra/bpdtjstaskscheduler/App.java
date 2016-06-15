@@ -13,12 +13,14 @@ public class App implements Runnable {
 	
 //	private MainFrame form;
 //	private CobaScheduler coba;
-	private CobaFrame cobaFrame;
+//	private CobaFrame cobaFrame;
+	private NewMainFrame frame;
 
     public App() {
 //        form = new MainFrame();
+        frame = new NewMainFrame();
 //    	coba = new CobaScheduler();
-    	cobaFrame = new CobaFrame();
+//    	cobaFrame = new CobaFrame();
     }
 
     public void start() {
@@ -28,8 +30,9 @@ public class App implements Runnable {
 //    @Override
     public void run() {
 //        form.setVisible(true);
-    	cobaFrame.setSize(new Dimension(500,300));
-    	cobaFrame.setVisible(true);
+        frame.setVisible(true);
+//    	cobaFrame.setSize(new Dimension(500,300));
+//    	cobaFrame.setVisible(true);
     	
     }
 
