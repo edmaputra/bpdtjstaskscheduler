@@ -26,6 +26,10 @@ public class MainPanel extends JPanel {
 		initComponents();
 		scheduler = new CobaScheduler(newJobName(newSchedule), newJobGroup(newSchedule), newTriggerName(newSchedule), newTriggerGroup(newSchedule));
 	}
+	
+	public void setTitle(String title){
+		
+	}
 
 	private void start() {
 		if (validateWaktu(txtJam, txtMenit)) {
@@ -70,7 +74,7 @@ public class MainPanel extends JPanel {
 			File f = chooser.getSelectedFile();
 			jTextField.setText(f.getAbsolutePath());
 		}
-	}
+	}	
 
 	private Boolean validateWaktu(JTextField jam, JTextField menit) {
 		Boolean validated = true;
