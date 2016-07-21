@@ -9,7 +9,7 @@ public class CorporateSongJob implements Job {
 //		Song song = new Song();
 //		song.playMp3File("E:\\Music\\Maksim - The Piano Player (2003)\\Maksim Mrvica - Croatian Rhapsody.mp3");
 		Song song = new Song();
-		song.playMp3File(DefaultValue.corporateSongDir);
+		song.startPlayBack(DefaultValue.corporateSongDir);
 	}
 
 }

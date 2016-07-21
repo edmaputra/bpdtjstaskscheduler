@@ -12,7 +12,7 @@ public class DoaJob implements Job{
 		// TODO Auto-generated method stub		
 		System.out.println("Play Doa Pagi");
 		Song song = new Song();
-		song.playMp3File(DefaultValue.doaPagiDir);	
+		song.startPlayBack(DefaultValue.doaPagiDir);	
 	}
 
 }

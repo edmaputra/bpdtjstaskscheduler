@@ -10,7 +10,7 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
-public class CobaScheduler {
+public class TaskScheduler {
 
 	private Scheduler scheduler;
 	private JobDetail job;
@@ -21,27 +21,34 @@ public class CobaScheduler {
 	private String jobName;
 	private String jobGroup;
 	private String triggerName;
-	private String triggerGroup;
-	
+	private String triggerGroup;	
 
-	public CobaScheduler() {
+	public TaskScheduler() {
 	}
 	
-	public CobaScheduler(String jobName, String jobGroup, String triggerName, String triggerGroup){
+	public TaskScheduler(String jobName, String jobGroup, String triggerName, String triggerGroup){
 		this.jobName = jobName;
 		this.jobGroup = jobGroup;
 		this.triggerName = triggerName;
 		this.triggerGroup = triggerGroup;
+//		try {
+//			scheduler = new StdSchedulerFactory().getScheduler();
+//			scheduler.start();
+//		} catch (SchedulerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
-	public void runScheduler(String hour, String minute) throws SchedulerException {
+	public void runScheduler(String hour, String minute, String jobName, String jobGroup, String triggerName, String triggerGroup) throws SchedulerException {
 
-		job = newJob(CobaJob.class).withIdentity(jobName, jobGroup).build();
+		job = newJob(TaskJob.class).withIdentity(jobName, jobGroup).build();	
 
 		trigger = setTrigger(job, hour, minute, triggerName, triggerGroup);
 
-		scheduler = new StdSchedulerFactory().getScheduler();
-		startEachScheduler(scheduler, job, trigger, path);
+//		scheduler = new StdSchedulerFactory().getScheduler();
+//		startEachScheduler(scheduler, job, trigger, path);
+		addScheduleJobToScheduler(scheduler, job, trigger, path);
 	}
 
 	public void stopScheduler() throws SchedulerException {
@@ -58,13 +65,25 @@ public class CobaScheduler {
 		return "0 " + minute + " " + hour + " ? * MON-FRI *";
 		// return "0 " + minute + " " + hour + " 1/1 * ? *";
 	}
+	
+	private void addScheduleJobToScheduler(Scheduler scheduler, JobDetail job, Trigger trigger, String path){
+		try {
+//			System.out.println(path);
+			scheduler.getContext().put("path", path);
+			scheduler.scheduleJob(job, trigger);
+			scheduler.start();
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private void startEachScheduler(Scheduler scheduler, JobDetail job, Trigger trigger, String path) {
 		try {
 			scheduler.getContext().put("path", path);
 			scheduler.scheduleJob(job, trigger);
 			scheduler.start();
-			System.out.println("Started");
+			System.out.println(jobName+" Started");
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

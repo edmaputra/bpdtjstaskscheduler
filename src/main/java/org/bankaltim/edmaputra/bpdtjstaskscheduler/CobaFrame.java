@@ -13,10 +13,10 @@ public class CobaFrame extends JFrame {
 
 	private static final long serialVersionUID = -867303560708939702L;
 	
-	private CobaScheduler cobaScheduler;
+	private TaskScheduler cobaScheduler;
 
 	public CobaFrame() {
-		cobaScheduler = new CobaScheduler();
+		cobaScheduler = new TaskScheduler();
 		initComponents();
 //		start();
 	}
@@ -52,12 +52,12 @@ public class CobaFrame extends JFrame {
 	}
 
 	private void start() {
-		try {
-			cobaScheduler.setPath(DefaultValue.doaPagiDir);
-			cobaScheduler.runScheduler("10","10");
-		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			cobaScheduler.setPath(DefaultValue.doaPagiDir);
+//			cobaScheduler.runScheduler("10","10");
+//		} catch (SchedulerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }

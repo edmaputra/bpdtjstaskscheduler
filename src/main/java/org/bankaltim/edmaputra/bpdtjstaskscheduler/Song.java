@@ -13,7 +13,7 @@ public class Song {
 	public Song(){
 	}
 	
-	public void playMp3File(String path) {
+	public void startPlayBack(String path) {
 		soundToPlay = new SoundJLayer(path);
 		soundToPlay.play();
 	}
@@ -21,7 +21,6 @@ public class Song {
 	public void stopPlayBack(){
 //		soundToPlay.playbackFinished(new PlaybackEvent(null, null, null));
 	}
-
 }
 
 class SoundJLayer extends PlaybackListener implements Runnable {
@@ -37,8 +36,6 @@ class SoundJLayer extends PlaybackListener implements Runnable {
 		try {
 			String urlAsString = "file:///" + new File(filePath).getCanonicalPath();
 			
-//			System.out.println()
-
 			this.player = new AdvancedPlayer(new java.net.URL(urlAsString).openStream(),
 					javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice());
 

@@ -1,6 +1,5 @@
 package org.bankaltim.edmaputra.bpdtjstaskscheduler;
 
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

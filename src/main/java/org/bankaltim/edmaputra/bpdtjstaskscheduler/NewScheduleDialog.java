@@ -16,14 +16,14 @@ public class NewScheduleDialog extends JDialog {
 	}
 	
 	private void ok(){
-		if (!txtNamaSchedule.getText().trim().isEmpty()){
-			String newSchedule = txtNamaSchedule.getText();
-			MainPanel newPanel = new MainPanel(newSchedule);
-			parent.add(newPanel);
-			this.dispose();
-		} else {
-			JOptionPane.showMessageDialog(null, "Harap Isi Nama Schedule");
-		}		
+//		if (!txtNamaSchedule.getText().trim().isEmpty()){
+//			String newSchedule = txtNamaSchedule.getText();
+//			MainPanel newPanel = new MainPanel(newSchedule);
+//			parent.add(newPanel);
+//			this.dispose();
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Harap Isi Nama Schedule");
+//		}		
 	}
 
 	private void initComponents() {
