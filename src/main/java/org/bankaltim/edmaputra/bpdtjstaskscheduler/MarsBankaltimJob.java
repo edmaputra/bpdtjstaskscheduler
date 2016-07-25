@@ -11,7 +11,8 @@ public class MarsBankaltimJob implements Job{
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		// TODO Auto-generated method stub
 		Song song = new Song();
-		song.startPlayBack(DefaultValue.marsBankaltimDir);		
+		song.startPlayBack(DefaultValue.marsBankaltimDir);
+		System.out.println("Mars Bankaltim Played");
 	}
 
 }

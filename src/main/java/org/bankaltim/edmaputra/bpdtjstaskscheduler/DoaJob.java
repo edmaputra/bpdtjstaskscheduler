@@ -9,10 +9,9 @@ public class DoaJob implements Job{
 	
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		// TODO Auto-generated method stub		
-		System.out.println("Play Doa Pagi");
 		Song song = new Song();
-		song.startPlayBack(DefaultValue.doaPagiDir);	
+		song.startPlayBack(DefaultValue.doaPagiDir);
+		System.out.println("Doa Pagi Played");
 	}
 
 }
