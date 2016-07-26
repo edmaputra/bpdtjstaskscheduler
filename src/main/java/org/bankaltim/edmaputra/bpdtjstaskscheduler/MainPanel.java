@@ -184,6 +184,7 @@ public class MainPanel extends JPanel {
 		lblWaktu = new javax.swing.JLabel();
 		txtJam = new IntegerField();
 		txtMenit = new IntegerField();
+		chkAktif = new javax.swing.JCheckBox();
 
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -224,6 +225,15 @@ public class MainPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         add(txtMenit, gridBagConstraints);
+        
+        chkAktif.setText("Aktif");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        add(chkAktif, gridBagConstraints);
 	}
 
 //	private javax.swing.JButton btnBrowseFile;
@@ -234,6 +244,7 @@ public class MainPanel extends JPanel {
 //	private javax.swing.JTextField txtBrowseFile;
 	private IntegerField txtJam;
 	private IntegerField txtMenit;
+	private javax.swing.JCheckBox chkAktif;
 
 	public IntegerField getTxtJam() {
 		return txtJam;
@@ -313,14 +324,14 @@ public class MainPanel extends JPanel {
 		this.triggerName = triggerName;
 	}
 
-//	public javax.swing.JTextField getTxtBrowseFile() {
-//		return txtBrowseFile;
-//	}
+	public javax.swing.JCheckBox getChkAktif() {
+		return chkAktif;
+	}
 	
 
-//	public void setTxtBrowseFile(javax.swing.JTextField txtBrowseFile) {
-//		this.txtBrowseFile = txtBrowseFile;
-//	}
+	public void setChkAktif(javax.swing.JCheckBox chkAktif) {
+		this.chkAktif = chkAktif;
+	}
 		
 
 }

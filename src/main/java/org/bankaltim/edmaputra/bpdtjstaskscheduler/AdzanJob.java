@@ -13,5 +13,7 @@ public class AdzanJob implements Job{
 		Song song = new Song();
 		song.startPlayBack(DefaultValue.adzanDir);
 	}
+	
+	
 
 }

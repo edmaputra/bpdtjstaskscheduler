@@ -20,6 +20,7 @@ public class Song {
 	
 	public void stopPlayBack(){
 //		soundToPlay.playbackFinished(new PlaybackEvent(null, null, null));
+		soundToPlay.stop();
 	}
 }
 
